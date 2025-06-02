@@ -1,4 +1,7 @@
+CC=gcc
+CFLAGS=-static -Wall
+
 all:
-	gcc -o comp2 comp2.c
+	$(CC) $(CFLAGS) -o comp2 comp2.c
 clean:
 	rm -f comp2
