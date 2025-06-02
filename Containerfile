@@ -8,5 +8,4 @@ make
 EOT
 FROM scratch
 COPY --from=build comp2 .
-STOPSIGNAL SIGTERM
 ENTRYPOINT ["./comp2"]
