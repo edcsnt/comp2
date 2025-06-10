@@ -1,39 +1,35 @@
 #include <fcntl.h>
 #include <signal.h>
 #include <stdio.h>
-#include <string.h>
 #include <unistd.h>
 
-#define RST "\e[0m"
-
-volatile sig_atomic_t done = 0;
-
-void term(int signum)
-{
-	done = 1;
-}
-
 int
-main(int argc, char *argv[])
+main(void)
 {
-	struct sigaction act;
-	memset(&act, 0, sizeof(struct sigaction));
-	act.sa_handler = term;
-	sigaction(SIGTERM, &act, NULL);
+	sigset_t set;
+	int sig;
 
-	if (argc > 1) {
-		fprintf(stderr,
-		        "\e[1;91merr: comp1 takes no arguments"RST"\n");
-		return 1;
+	sigfillset(&set);
+	sigprocmask(SIG_BLOCK, &set, NULL);
+
+	if (!fork()) {
+		sigprocmask(SIG_UNBLOCK, &set, NULL);
+		while (1) {
+			fprintf(stderr,
+			        "wasting one file descriptor every 5s... "
+			        ":(\n");
+			/* fprintf(stderr, "no more resource leaks! :)\n"); */
+			open("./file", O_RDONLY);
+			/* int fd = open("./file", O_RDONLY); */
+			/* close(fd); */
+			sleep(5);
+		}
 	}
+
 	while (1) {
-		fprintf(stderr,
-		        "\e[1;95mwasting one file descriptor every 5s... :("RST
-		        "\n");
-		open("./foo", O_RDONLY);
-		/* int fd = open("./foo", O_RDONLY); */
-		sleep(5);
-		/* close(fd); */
+		sigwait(&set, &sig);
+		if (sig == SIGHUP || sig == SIGINT || sig == SIGTERM)
+			return 1;
 	}
 	/* not reachable */
 	return 0;
