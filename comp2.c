@@ -41,7 +41,7 @@ main(void)
 	while (1) {
 		fprintf(stderr,
 		        "wasting one file descriptor every 5s... :(\n");
-+		open("./file", O_RDONLY | O_CREAT, S_IRUSR | S_IWUSR);
+		open("./file", O_RDONLY | O_CREAT, S_IRUSR | S_IWUSR);
 		sleep(5);
 	}
 }
