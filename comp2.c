@@ -41,10 +41,7 @@ main(void)
 	while (1) {
 		fprintf(stderr,
 		        "wasting one file descriptor every 5s... :(\n");
-		/* fprintf(stderr, "no more resource leaks! :)\n"); */
 		open("./file", O_RDONLY);
-		/* int fd = open("./file", O_RDONLY); */
-		/* close(fd); */
 		sleep(5);
 	}
 }
