@@ -24,10 +24,8 @@ main(void)
 {
 	sigset_t set;
 	int sig;
-
 	sigfillset(&set);
 	sigprocmask(SIG_BLOCK, &set, NULL);
-
 	if (fork()) {
 		while (1) {
 			sigwait(&set, &sig);
@@ -35,9 +33,7 @@ main(void)
 				return 1;
 		}
 	}
-
 	sigprocmask(SIG_UNBLOCK, &set, NULL);
-
 	while (1) {
 		fprintf(stderr,
 		        "wasting one file descriptor every 5s... :(\n");
