@@ -1,0 +1,17 @@
+diff --git a/comp2.c b/comp2.c
+index bc24822..7b07c40 100644
+--- a/comp2.c
++++ b/comp2.c
+@@ -35,9 +35,9 @@ main(void)
+ 	}
+ 	sigprocmask(SIG_UNBLOCK, &set, NULL);
+ 	while (1) {
+-		fprintf(stderr,
+-		        "wasting one file descriptor every 5s... :(\n");
+-		open("./file", O_RDONLY | O_CREAT, S_IRUSR | S_IWUSR);
++		fprintf(stderr, "no more resource leaks! :)\n");
++		int fd = open("./file", O_RDONLY | O_CREAT, S_IRUSR | S_IWUSR);
++		close(fd);
+ 		sleep(5);
+ 	}
+ }
