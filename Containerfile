@@ -1,5 +1,5 @@
 FROM docker.io/library/alpine:latest AS build
-COPY comp2.c config.mk Makefile .
+COPY comp2.c config.mk Makefile /
 RUN <<EOT
   apk -UX https://dl-cdn.alpinelinux.org/alpine/edge/testing/ upgrade
   apk -X https://dl-cdn.alpinelinux.org/alpine/edge/testing/ add \
@@ -9,6 +9,6 @@ RUN <<EOT
   ln -fs cproc /usr/bin/cc
   make
 EOT
-FROM docker.io/library/scratch
-COPY --from=build comp2 .
+FROM scratch
+COPY --from=build comp2 /
 ENTRYPOINT ["/comp2"]
