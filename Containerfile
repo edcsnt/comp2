@@ -6,6 +6,7 @@ RUN <<EOT
     cproc \
     make \
     musl-dev
+  ln -fs cproc /usr/bin/cc
   make
 EOT
 FROM scratch
