@@ -55,6 +55,8 @@ jobs:
           ${{ secrets.LICENSE }} \
           >/etc/cppcheckpremium/cppcheck-premium.lic"
           /opt/cppcheckpremium/cppcheck \
+          --checkers-report=cppcheck.log \
           --premium=misra-c-2025 \
           ${{ github.event.repository.name }}
+          more cppcheck.log
     timeout-minutes: 5
