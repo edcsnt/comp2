@@ -60,5 +60,6 @@ jobs:
           ${{ github.event.repository.name }}
           more cppcheck.log
         env:
-          LICENSE: ${{ secrets.LICENSE }}
+          LICENSE: |
+            ${{ secrets.LICENSE }}
     timeout-minutes: 5
