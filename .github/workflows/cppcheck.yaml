@@ -1,0 +1,59 @@
+---
+# Copyright (C) 2025 Eduardo Santos <eduardo.experimental@gmail.com>
+#
+# This file is part of edcsnt/comp2.
+#
+# edcsnt/comp2 is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or (at
+# your option) any later version.
+#
+# edcsnt/comp2 is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with edcsnt/comp2. If not, see <https://www.gnu.org/licenses/>.
+name: cppcheck
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/cppcheck.yaml
+      - comp2.c
+  workflow_dispatch: {}
+permissions: {}
+defaults:
+  run:
+    shell: sh
+jobs:
+  cppcheck:
+    runs-on:
+      - ubuntu-latest
+    steps:
+      - run: |
+          git clone \
+          -b ${{ github.ref_name }} \
+          --depth 1 \
+          ${{ github.repositoryUrl }}
+          curl https://files.cppchecksolutions.com/pgp-key.public \
+          | gpg --dearmor -o /etc/apt/keyrings/cppcheckpremium.gpg
+          printf '%s\n' \
+          'Types: deb' \
+          'URIs: https://files.cppchecksolutions.com/apt-repo' \
+          'Suites: noble' \
+          'Components: stable' \
+          'Architectures: amd64' \
+          'Signed-By: /etc/apt/keyrings/cppcheckpremium.gpg' \
+          >/etc/apt/sources.list.d/cppcheckpremium.sources
+          apt-get update
+          apt-get --no-install-recommends -y cppcheckpremium
+          printf '%s' \
+          ${{ secrets.LICENSE }} \
+          >/etc/cppcheckpremium/cppcheck-premium.lic
+          /opt/cppcheckpremium/cppcheck \
+          --premium=misra-c-2025 \
+          ${{ github.event.repository.name }}
+    timeout-minutes: 1
