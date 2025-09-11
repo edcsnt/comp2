@@ -56,4 +56,4 @@ jobs:
           /opt/cppcheckpremium/cppcheck \
           --premium=misra-c-2025 \
           ${{ github.event.repository.name }}
-    timeout-minutes: 1
+    timeout-minutes: 5
