@@ -54,14 +54,14 @@ jobs:
           sudo sh -c "printf '%s' \
           "$LICENSE" \
           >/etc/cppcheckpremium/cppcheck-premium.lic"
+          sudo stat -c %a /etc/cppcheckpremium/cppcheck-premium.lic
+          sudo ls -l /etc/cppcheckpremium
           sudo /opt/cppcheckpremium/cppcheck \
           --checkers-report=cppcheck.log \
           --premium=misra-c-2025 \
           ${{ github.event.repository.name }} \
           && :
           more cppcheck.log
-          sudo stat -c %a /etc/cppcheckpremium/cppcheck-premium.lic
-          sudo ls -l /etc/cppcheckpremium
         env:
           LICENSE: |
             ${{ secrets.LICENSE }}
