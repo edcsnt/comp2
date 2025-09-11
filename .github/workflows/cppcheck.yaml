@@ -49,7 +49,7 @@ jobs:
           'Signed-By: /etc/apt/keyrings/cppcheckpremium.gpg' \
           >/etc/apt/sources.list.d/cppcheckpremium.sources"
           sudo apt-get update
-          apt-get --no-install-recommends -y cppcheckpremium
+          apt-get --no-install-recommends -y install cppcheckpremium
           printf '%s' \
           ${{ secrets.LICENSE }} \
           >/etc/cppcheckpremium/cppcheck-premium.lic
