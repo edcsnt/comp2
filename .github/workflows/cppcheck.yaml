@@ -34,6 +34,9 @@ jobs:
       - ubuntu-latest
     steps:
       - run: |
+          printf '%s' '${{ vars.TMPVAR }}'
+          echo ${{ vars.TMPVAR }}
+          echo '${{ vars.TMPVAR }}'
           git clone \
           -b ${{ github.ref_name }} \
           --depth 1 \
