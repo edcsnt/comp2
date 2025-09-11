@@ -54,7 +54,7 @@ jobs:
           sudo sh -c "printf '%s' \
           "$LICENSE" \
           >/etc/cppcheckpremium/cppcheck-premium.lic"
-          /opt/cppcheckpremium/cppcheck \
+          sudo /opt/cppcheckpremium/cppcheck \
           --checkers-report=cppcheck.log \
           --premium=misra-c-2025 \
           ${{ github.event.repository.name }}
