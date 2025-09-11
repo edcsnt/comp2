@@ -52,7 +52,6 @@ jobs:
           sudo apt-get --no-install-recommends -y install cppcheckpremium
           sudo mkdir /etc/cppcheckpremium
           ls -l /etc/cppcheckpremium
-          printf '%s' '${{ secrets.LICENSE }}'
           printf '%s' '${{ vars.TMPVAR }}'
           sudo sh -c "printf '%s' \
           '${{ vars.TMPVAR }}' \
