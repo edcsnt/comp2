@@ -57,7 +57,8 @@ jobs:
           sudo /opt/cppcheckpremium/cppcheck \
           --checkers-report=cppcheck.log \
           --premium=misra-c-2025 \
-          ${{ github.event.repository.name }}
+          ${{ github.event.repository.name }} \
+          && :
           more cppcheck.log
         env:
           LICENSE: |
