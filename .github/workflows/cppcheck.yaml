@@ -51,6 +51,8 @@ jobs:
           sudo apt-get update
           sudo apt-get --no-install-recommends -y install cppcheckpremium
           sudo mkdir /etc/cppcheckpremium
+          ls -l /etc/cppcheckpremium
+          printf '%s' '${{ secrets.LICENSE }}'
           sudo sh -c "printf '%s' \
           '${{ secrets.LICENSE }}' \
           >/etc/cppcheckpremium/cppcheck-premium.lic"
