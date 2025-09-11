@@ -48,8 +48,8 @@ jobs:
           'Architectures: amd64' \
           'Signed-By: /etc/apt/keyrings/cppcheckpremium.gpg' \
           >/etc/apt/sources.list.d/cppcheckpremium.sources"
-          apt-get update
-          sudo apt-get --no-install-recommends -y cppcheckpremium
+          sudo apt-get update
+          apt-get --no-install-recommends -y cppcheckpremium
           printf '%s' \
           ${{ secrets.LICENSE }} \
           >/etc/cppcheckpremium/cppcheck-premium.lic
