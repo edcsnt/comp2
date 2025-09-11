@@ -50,7 +50,7 @@ jobs:
           >/etc/apt/sources.list.d/cppcheckpremium.sources"
           sudo apt-get update
           sudo apt-get --no-install-recommends -y install cppcheckpremium
-          mkdir /etc/cppcheckpremium
+          sudo mkdir /etc/cppcheckpremium
           printf '%s' \
           ${{ secrets.LICENSE }} \
           >/etc/cppcheckpremium/cppcheck-premium.lic
