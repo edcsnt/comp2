@@ -52,9 +52,8 @@ jobs:
           sudo apt-get --no-install-recommends -y install cppcheckpremium
           sudo mkdir /etc/cppcheckpremium
           sudo sh -c "printf '%s' \
-          '${{ vars.TMPVAR }}' \
+          '${{ secrets.LICENSE }}' \
           >/etc/cppcheckpremium/cppcheck-premium.lic"
-          more /etc/cppcheckpremium/cppcheck-premium.lic
           /opt/cppcheckpremium/cppcheck \
           --checkers-report=cppcheck.log \
           --premium=misra-c-2025 \
