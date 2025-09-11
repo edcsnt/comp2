@@ -39,7 +39,7 @@ jobs:
           --depth 1 \
           ${{ github.server_url }}/${{ github.repository }}.git
           curl https://files.cppchecksolutions.com/pgp-key.public \
-          | gpg --dearmor -o /etc/apt/keyrings/cppcheckpremium.gpg
+          | sudo gpg --dearmor -o /etc/apt/keyrings/cppcheckpremium.gpg
           printf '%s\n' \
           'Types: deb' \
           'URIs: https://files.cppchecksolutions.com/apt-repo' \
