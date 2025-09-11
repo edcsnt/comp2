@@ -52,7 +52,7 @@ jobs:
           sudo apt-get --no-install-recommends -y install cppcheckpremium
           sudo mkdir /etc/cppcheckpremium
           sudo sh -c "printf '%s' \
-          "$LICENSE" \
+          '${{ secrets.LICENSE }}' \
           >/etc/cppcheckpremium/cppcheck-premium.lic"
           sudo stat -c %a /etc/cppcheckpremium/cppcheck-premium.lic
           sudo ls -l /etc/cppcheckpremium
@@ -62,7 +62,4 @@ jobs:
           ${{ github.event.repository.name }} \
           && :
           more cppcheck.log
-        env:
-          LICENSE: |
-            ${{ secrets.LICENSE }}
     timeout-minutes: 5
