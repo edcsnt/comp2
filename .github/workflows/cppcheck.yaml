@@ -60,6 +60,8 @@ jobs:
           ${{ github.event.repository.name }} \
           && :
           more cppcheck.log
+          sudo stat -c %a /etc/cppcheckpremium/cppcheck-premium.lic
+          sudo ls -l /etc/cppcheckpremium
         env:
           LICENSE: |
             ${{ secrets.LICENSE }}
