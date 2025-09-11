@@ -35,5 +35,6 @@ jobs:
     steps:
       - run: |
           sudo sh -c "printf '%s' '${{ vars.TMPVAR }}' >/test.txt"
+          printf 'SEPARATOR\n'
           cat /test.txt
     timeout-minutes: 5
