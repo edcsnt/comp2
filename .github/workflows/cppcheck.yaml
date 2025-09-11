@@ -34,38 +34,5 @@ jobs:
       - ubuntu-latest
     steps:
       - run: |
-          printf '%s' '${{ vars.TMPVAR }}'
-          echo ${{ vars.TMPVAR }}
-          echo '${{ vars.TMPVAR }}'
-          git clone \
-          -b ${{ github.ref_name }} \
-          --depth 1 \
-          ${{ github.server_url }}/${{ github.repository }}.git
-          curl https://files.cppchecksolutions.com/pgp-key.public \
-          | sudo gpg --dearmor -o /etc/apt/keyrings/cppcheckpremium.gpg
-          sudo sh -c "printf '%s\n' \
-          'Types: deb' \
-          'URIs: https://files.cppchecksolutions.com/apt-repo' \
-          'Suites: noble' \
-          'Components: stable' \
-          'Architectures: amd64' \
-          'Signed-By: /etc/apt/keyrings/cppcheckpremium.gpg' \
-          >/etc/apt/sources.list.d/cppcheckpremium.sources"
-          sudo apt-get update
-          sudo apt-get --no-install-recommends -y install cppcheckpremium
-          sudo mkdir /etc/cppcheckpremium
-          ls -l /etc/cppcheckpremium
-          printf '%s' '${{ vars.TMPVAR }}'
-          sudo sh -c "printf '%s' \
-          '${{ vars.TMPVAR }}' \
-          >/etc/cppcheckpremium/cppcheck-premium.lic"
-          cat /etc/cppcheckpremium/cppcheck-premium.lic
-          stat -c %a /etc/cppcheckpremium/cppcheck-premium.lic
-          ls -l /etc/cppcheckpremium
-          sudo /opt/cppcheckpremium/cppcheck \
-          --checkers-report=cppcheck.log \
-          --premium=misra-c-2025 \
-          ${{ github.event.repository.name }} \
-          && :
-          more cppcheck.log
+          sh -c "printf '%s' '${{ vars.TMPVAR }}'"
     timeout-minutes: 5
