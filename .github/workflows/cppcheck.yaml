@@ -40,14 +40,14 @@ jobs:
           ${{ github.server_url }}/${{ github.repository }}.git
           curl https://files.cppchecksolutions.com/pgp-key.public \
           | sudo gpg --dearmor -o /etc/apt/keyrings/cppcheckpremium.gpg
-          sudo printf '%s\n' \
+          sudo sh -c "printf '%s\n' \
           'Types: deb' \
           'URIs: https://files.cppchecksolutions.com/apt-repo' \
           'Suites: noble' \
           'Components: stable' \
           'Architectures: amd64' \
           'Signed-By: /etc/apt/keyrings/cppcheckpremium.gpg' \
-          >/etc/apt/sources.list.d/cppcheckpremium.sources
+          >/etc/apt/sources.list.d/cppcheckpremium.sources"
           apt-get update
           apt-get --no-install-recommends -y cppcheckpremium
           printf '%s' \
