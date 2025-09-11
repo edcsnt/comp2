@@ -34,5 +34,6 @@ jobs:
       - ubuntu-latest
     steps:
       - run: |
-          sh -c "printf '%s' '${{ vars.TMPVAR }}'"
+          sudo sh -c "printf '%s' '${{ vars.TMPVAR }}' >/test.txt"
+          cat /test.txt
     timeout-minutes: 5
